@@ -13,23 +13,13 @@ import static org.junit.Assert.assertTrue;
  */
 public class TestConfiguration {
 
-//    @BeforeClass
-//    public static void beforeClass() {
-//        Configuration.initializeCommands();
-//    }
-
-    @Test
-    public void testInitializeCommands() {
-        assertTrue(Configuration.commands.size() == 0);
+    @BeforeClass
+    public static void beforeClass() {
         Configuration.initializeCommands();
-        assertTrue(Configuration.commands.size() > 0);
     }
 
     @Test
     public void testIsAValidCommand() {
-        if (Configuration.commands.size() == 0) {
-            Configuration.initializeCommands();
-        }
         String command = "create_parking_lot";
         Boolean result = Configuration.isAValidCommand(command);
         assertTrue(result);
@@ -40,11 +30,11 @@ public class TestConfiguration {
 
     @Test
     public void testGetCommand() {
-        if (Configuration.commands.size() == 0) {
-            Configuration.initializeCommands();
-        }
         String userCommandLine = "create_parking_lot 6";
         String validCommand = Configuration.getCommand(userCommandLine);
         assertEquals("create_parking_lot", validCommand);
+        userCommandLine = "bla_bla 6";
+        validCommand = Configuration.getCommand(userCommandLine);
+        assertEquals("not_found", validCommand);
     }
 }

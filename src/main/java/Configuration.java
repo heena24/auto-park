@@ -7,8 +7,7 @@ import java.util.List;
  * Created by heena.h on 13/02/17.
  */
 public class Configuration {
-    public static List<String> commands = new ArrayList<>();
-//    static Map<Integer,Boolean> slotMap = new HashMap<>();
+    static List<String> commands = new ArrayList<>();
 
     public static void initializeCommands() {
         commands.add("create_parking_lot");
@@ -21,10 +20,20 @@ public class Configuration {
     }
 
     public static boolean isAValidCommand(String command) {
+        for(String validCommand : commands){
+            if (command.contains(validCommand)){
+                return true;
+            }
+        }
         return false;
     }
 
     public static String getCommand(String userCommand) {
+        for(String validCommand : commands){
+            if (userCommand.contains(validCommand)){
+                return validCommand;
+            }
+        }
         return "not_found";
     }
 }
