@@ -9,6 +9,18 @@ import java.util.List;
 public class Parking {
     public static List<Slot> slotList = new ArrayList<>();
 
+    public static int getSlotListSize() {
+        return slotList.size();
+    }
+
+    public static Slot getSlot(int index) {
+        return slotList.get(index);
+    }
+
+    public static void resetSlotList() {
+        Parking.slotList = new ArrayList<>();
+    }
+
     //commond : create_parking_lot
     public static void initializeParking(int slotCount) {
 

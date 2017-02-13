@@ -78,7 +78,7 @@ public class Service {
             // check availability of slot
             Slot slot = Parking.getAvailableSlot();
             if (slot != null) {
-                slot.availability = false;
+                slot.setAvailability(false);
                 // create ticket for that slot
                 slot.ticket = new Ticket(carNumber.trim(),carColour.trim());
                 // Update parking with the updated slot
