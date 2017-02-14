@@ -98,11 +98,11 @@ public class TestParking {
         s2.setAvailability(false);
         s2.ticket = new Ticket("KA03EZ911","White");
 
-        int output = Parking.getSlotNumbersForCarsWithColour("Black");
+        String output = Parking.getSlotNumbersForCarsWithColour("Black");
         assertEquals(output,1);
 
         output = Parking.getSlotNumbersForCarsWithColour("Red");
-        assertEquals(output,-1);
+        assertEquals(output,"");
 
     }
 

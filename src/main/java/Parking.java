@@ -74,21 +74,23 @@ public class Parking {
     }
 
     public static String getCarRegistrationNumbersForTheGivenColour(String colour) {
+        String response = "";
         for(Slot slot : slotList) {
             if (slot.ticket != null && slot.ticket.carColour.equals(colour)) {
-                return slot.ticket.carRegistrationNumber ;
+                response += slot.ticket.carRegistrationNumber + ",";
             }
         }
-        return "";
+        return response;
     }
 
-    public static int getSlotNumbersForCarsWithColour(String colour) {
+    public static String getSlotNumbersForCarsWithColour(String colour) {
+        String response = "";
         for(Slot slot : slotList) {
             if (slot.ticket != null && slot.ticket.carColour.equals(colour)) {
-                return slot.getSlotNumber();
+                response += slot.getSlotNumber() + ",";
             }
         }
-        return -1;
+        return response;
     }
 
     public static int getSlotNumberForRegistrationNumber(String registrationNumber) {

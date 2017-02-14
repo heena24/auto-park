@@ -60,7 +60,6 @@ public class Service {
     }
 
     public static void executeCommand(String commmand, String params){
-        int response = 0;
         if(!commmand.equals("park") && !commmand.equals("status")) {
             if (commmand.equals("create_parking_lot")) {
                 Parking.initializeParking(Integer.parseInt(params.trim()));
@@ -71,20 +70,23 @@ public class Service {
                 if (responseStr.equals("")) {
                     System.out.println("Not found.");
                 } else {
-                    System.out.println(response);
+                    System.out.println(responseStr);
                 }
             } else if (commmand.equals("slot_numbers_for_cars_with_colour")) {
-                response = Parking.getSlotNumbersForCarsWithColour(params.trim());
+                String responseStr = Parking.getSlotNumbersForCarsWithColour(params.trim());
+                if (responseStr.equals("")) {
+                    System.out.println("Not found.");
+                } else {
+                    System.out.println(responseStr);
+                }
             } else if (commmand.equals("slot_number_for_registration_number")) {
-                response = Parking.getSlotNumberForRegistrationNumber(params.trim());
+                int response = Parking.getSlotNumberForRegistrationNumber(params.trim());
+                if (response != -1) {
+                    System.out.println(response);
+                } else {
+                    System.out.println("Not found.");
+                }
             }
-
-            if (response != -1) {
-                System.out.println(response);
-            } else {
-                System.out.println("Not found.");
-            }
-
         } else if (commmand.equals("park")){
             String carNumber = params.substring(0,params.indexOf(" "));
             String carColour = params.substring(params.indexOf(" "));
