@@ -13,7 +13,7 @@ public class Service {
         Configuration.initializeCommands();
         if (args != null && args.length > 0) {
             System.out.println("File mode");
-            // file mode
+            // file mode  : full path of the file needs to be provided
            fileMode(args[0]);
         } else {
             // interactive mode
@@ -29,6 +29,8 @@ public class Service {
             uniParam(params);
         } else if (command.equals("status")) {
             Parking.getCurrentStatus();
+        } else {
+            System.out.println("Incorrect command line : " + command + " " + params);
         }
     }
 
@@ -82,10 +84,8 @@ public class Service {
     public static void interactiveMode() {
         System.out.println("Interactive mode");
         Scanner scanner = new Scanner(System.in);
-        String commandLine = scanner.next();
+        String commandLine = scanner.nextLine();
         while (Configuration.isAValidCommand(commandLine)){
-            // execute command
-            System.out.println(commandLine);
             String command = Configuration.getCommand(commandLine);
             if (commandLine.contains(" ")) {
                 executeCommand(command.trim(), commandLine.substring(commandLine.indexOf(" ")+1));
@@ -93,9 +93,9 @@ public class Service {
                 executeCommand(command, "");
             }
             // Read next instruction
-            commandLine = scanner.next();
+            commandLine = scanner.nextLine();
         }
-        System.out.println("Incorrect command : " + commandLine);
+        System.out.println("Exiting, incorrect command : " + commandLine);
     }
 
     public static void fileMode(String arg) {
@@ -118,7 +118,7 @@ public class Service {
             }
             reader.close();
         } catch (IOException e) {
-            System.err.format("Exception occurred trying to read file '%s'.", arg);
+            System.err.format("Exception occurred while trying to read file '%s'.", arg);
         }
     }
 

@@ -19,9 +19,9 @@ public class Configuration {
         commands.add("slot_number_for_registration_number");
     }
 
-    public static boolean isAValidCommand(String command) {
+    public static boolean isAValidCommand(String commandLine) {
         for(String validCommand : commands){
-            if (command.contains(validCommand)){
+            if (commandLine.contains(validCommand)){
                 return true;
             }
         }
