@@ -59,8 +59,13 @@ public class TestParking {
         s1.setAvailability(false);
 
         Slot s2 = Parking.getAvailableSlot();
-        assertEquals(s2.getSlotNumber(),2);
-        assertTrue(s2.getAvailability());
+
+        Slot availSlot = Parking.getAvailableSlot();
+        assertEquals(availSlot.getSlotNumber(),s2.getSlotNumber());
+
+        s2.setAvailability(false);
+        availSlot = Parking.getAvailableSlot();
+        assertEquals(availSlot,null);
     }
 
     @Test
@@ -94,8 +99,11 @@ public class TestParking {
         s2.ticket = new Ticket("KA03EZ911","White");
 
         int output = Parking.getSlotNumbersForCarsWithColour("Black");
-
         assertEquals(output,1);
+
+        output = Parking.getSlotNumbersForCarsWithColour("Red");
+        assertEquals(output,-1);
+
     }
 
     @Test
@@ -111,7 +119,9 @@ public class TestParking {
         s2.ticket = new Ticket("KA03EZ911","White");
 
         int output = Parking.getSlotNumberForRegistrationNumber("KA03EZ911");
-
         assertEquals(output,2);
+
+        output = Parking.getSlotNumberForRegistrationNumber("KA03EZ000");
+        assertEquals(output,-1);
     }
 }

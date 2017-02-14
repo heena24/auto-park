@@ -60,18 +60,31 @@ public class Service {
     }
 
     public static void executeCommand(String commmand, String params){
+        int response = 0;
         if(!commmand.equals("park") && !commmand.equals("status")) {
             if (commmand.equals("create_parking_lot")) {
                 Parking.initializeParking(Integer.parseInt(params.trim()));
             } else if (commmand.equals("leave")){
                 Parking.freeThisSlot(Integer.parseInt(params.trim()));
             } else if (commmand.equals("registration_numbers_for_cars_with_colour")) {
-                System.out.println(Parking.getCarRegistrationNumbersForTheGivenColour(params.trim()));
+                String responseStr = Parking.getCarRegistrationNumbersForTheGivenColour(params.trim());
+                if (responseStr.equals("")) {
+                    System.out.println("Not found.");
+                } else {
+                    System.out.println(response);
+                }
             } else if (commmand.equals("slot_numbers_for_cars_with_colour")) {
-                System.out.println(Parking.getSlotNumbersForCarsWithColour(params.trim()));
+                response = Parking.getSlotNumbersForCarsWithColour(params.trim());
             } else if (commmand.equals("slot_number_for_registration_number")) {
-                System.out.println(Parking.getSlotNumberForRegistrationNumber(params.trim()));
+                response = Parking.getSlotNumberForRegistrationNumber(params.trim());
             }
+
+            if (response != -1) {
+                System.out.println(response);
+            } else {
+                System.out.println("Not found.");
+            }
+
         } else if (commmand.equals("park")){
             String carNumber = params.substring(0,params.indexOf(" "));
             String carColour = params.substring(params.indexOf(" "));
