@@ -67,8 +67,6 @@ public class Parking {
             if(!slot.getAvailability()) {
                 System.out.print(slot.slotNumber + "                   " + slot.ticket.carRegistrationNumber);
                 System.out.println("                " + slot.ticket.carColour);
-            } else {
-                System.out.println(slot.slotNumber + "                   N/A                          N/A");
             }
         }
     }
