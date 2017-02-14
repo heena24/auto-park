@@ -62,7 +62,7 @@ public class Parking {
 
     public static void getCurrentStatus() {
         System.out.println("Slot No.            Registration No.             Colour");
-        System.out.println();
+        System.out.println("-------------------------------------------------------");
         for (Slot slot : slotList) {
             if(!slot.getAvailability()) {
                 System.out.print(slot.slotNumber + "                   " + slot.ticket.carRegistrationNumber);
