@@ -41,15 +41,15 @@ public class Parking {
         System.out.println("Slot No.            Registration No.             Colour");
     }
 
-    public static void getCarRegistrationNumbersForTheGivenColour(String colour) {
-
+    public static String getCarRegistrationNumbersForTheGivenColour(String colour) {
+        return "";
     }
 
-    public static void getSlotNumbersForCarsWithColour(String colour) {
-
+    public static int getSlotNumbersForCarsWithColour(String colour) {
+        return -1;
     }
 
-    public static void getSlotNumbersForRegistrationNumber(String registrationNumber) {
-
+    public static int getSlotNumberForRegistrationNumber(String registrationNumber) {
+        return -1;
     }
 }

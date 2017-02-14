@@ -30,7 +30,7 @@ public class Slot {
 
     int slotNumber;
     boolean isAvailable;
-    Ticket ticket = null;
+    public Ticket ticket = null;
 
     public Slot(int newNumber, boolean newAvailability){
         this.slotNumber = newNumber;

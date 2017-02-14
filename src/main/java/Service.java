@@ -66,11 +66,11 @@ public class Service {
             } else if (commmand.equals("leave")){
                 Parking.freeThisSlot(Integer.parseInt(params.trim()));
             } else if (commmand.equals("registration_numbers_for_cars_with_colour")) {
-                Parking.getCarRegistrationNumbersForTheGivenColour(params.trim());
+                System.out.println(Parking.getCarRegistrationNumbersForTheGivenColour(params.trim()));
             } else if (commmand.equals("slot_numbers_for_cars_with_colour")) {
-                Parking.getSlotNumbersForCarsWithColour(params.trim());
+                System.out.println(Parking.getSlotNumbersForCarsWithColour(params.trim()));
             } else if (commmand.equals("slot_number_for_registration_number")) {
-                Parking.getSlotNumbersForRegistrationNumber(params.trim());
+                System.out.println(Parking.getSlotNumberForRegistrationNumber(params.trim()));
             }
         } else if (commmand.equals("park")){
             String carNumber = params.substring(0,params.indexOf(" "));
