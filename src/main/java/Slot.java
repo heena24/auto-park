@@ -8,10 +8,6 @@ public class Slot {
         return slotNumber;
     }
 
-    public void setSlotNumber(int slotNumber) {
-        this.slotNumber = slotNumber;
-    }
-
     public boolean getAvailability() {
         return isAvailable;
     }

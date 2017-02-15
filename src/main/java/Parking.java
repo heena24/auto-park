@@ -21,7 +21,10 @@ public class Parking {
         Parking.slotList = new ArrayList<>();
     }
 
-    //commond : create_parking_lot
+    /**
+     * Method to initialize parking slot for the requested count
+     * @param slotCount
+     */
     public static void initializeParking(int slotCount) {
         for (int i=1; i<=slotCount; i++) {
             slotList.add(new Slot(i,true));
@@ -29,6 +32,10 @@ public class Parking {
         System.out.println("Created a parking lot with " + slotCount + " slots.");
     }
 
+    /**
+     * Method to free the slot
+     * @param slotNumber
+     */
     public static void freeThisSlot(int slotNumber){
         for(Slot slot : slotList) {
             if (slot.getSlotNumber() == slotNumber) {
@@ -40,6 +47,10 @@ public class Parking {
         }
     }
 
+    /**
+     * Method to fetch the next available slot
+     * @return
+     */
     public static Slot getAvailableSlot(){
         for(Slot slot : slotList) {
             if(slot.getAvailability()) {
@@ -50,50 +61,58 @@ public class Parking {
         return null;
     }
 
-    public static void addUpdatedSlot(Slot newSlot) {
-        for (Slot slot : slotList) {
-            if(slot.getSlotNumber() == newSlot.slotNumber){
-                slotList.remove(slot);
-                slotList.add(newSlot);
-                break;
-            }
-        }
-    }
-
+    /**
+     * Method to print the status of the initialized slots
+     */
     public static void getCurrentStatus() {
         System.out.println("Slot No.            Registration No.             Colour");
         System.out.println("-------------------------------------------------------");
         for (Slot slot : slotList) {
             if(!slot.getAvailability()) {
-                System.out.print(slot.slotNumber + "                   " + slot.ticket.carRegistrationNumber);
-                System.out.println("                " + slot.ticket.carColour);
+                System.out.print(slot.getSlotNumber() + "                   " + slot.getTicket().carRegistrationNumber);
+                System.out.println("                " + slot.getTicket().carColour);
             }
         }
     }
 
+    /**
+     * Method to query Car registration numbers for the given colour car
+     * @param colour
+     * @return
+     */
     public static String getCarRegistrationNumbersForTheGivenColour(String colour) {
         String response = "";
         for(Slot slot : slotList) {
-            if (slot.ticket != null && slot.ticket.carColour.equals(colour)) {
-                response += slot.ticket.carRegistrationNumber + ",";
+            if (slot.getTicket() != null && slot.getTicket().carColour.equalsIgnoreCase(colour)) {
+                response += slot.getTicket().carRegistrationNumber + ",";
             }
         }
         return response;
     }
 
+    /**
+     * Method to query Slot numbers of the car for the given colour
+     * @param colour
+     * @return
+     */
     public static String getSlotNumbersForCarsWithColour(String colour) {
         String response = "";
         for(Slot slot : slotList) {
-            if (slot.ticket != null && slot.ticket.carColour.equals(colour)) {
+            if (slot.getTicket() != null && slot.getTicket().carColour.equalsIgnoreCase(colour)) {
                 response += slot.getSlotNumber() + ",";
             }
         }
         return response;
     }
 
+    /**
+     * Method to query Slot number of the car for the given registration number
+     * @param registrationNumber
+     * @return
+     */
     public static int getSlotNumberForRegistrationNumber(String registrationNumber) {
         for(Slot slot : slotList) {
-            if (slot.ticket != null && slot.ticket.carRegistrationNumber.equals(registrationNumber)) {
+            if (slot.getTicket() != null && slot.getTicket().carRegistrationNumber.equalsIgnoreCase(registrationNumber)) {
                 return slot.getSlotNumber();
             }
         }

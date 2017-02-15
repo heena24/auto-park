@@ -12,7 +12,7 @@ public class Service {
     public static void main(String[] args) throws IOException {
         Configuration.initializeCommands();
         if (args != null && args.length > 0) {
-            System.out.println("File mode");
+            System.out.println("File mode : ");
             // file mode  : full path of the file needs to be provided
            fileMode(args[0]);
         } else {
@@ -22,11 +22,16 @@ public class Service {
 
     }
 
+    /**
+     * Method to filter command based on the parameter list
+     * @param command : command provided by User
+     * @param params : params separated from command line provide by user
+     */
     public static void executeCommand(String command, String params){
         if(!command.equals("park") && !command.equals("status")) {
-            multiParam(command,params);
+            uniiParam(command,params);
         } else if (command.equals("park")){
-            uniParam(params);
+            multiParam(params);
         } else if (command.equals("status")) {
             Parking.getCurrentStatus();
         } else {
@@ -34,7 +39,11 @@ public class Service {
         }
     }
 
-    public static void uniParam(String params) {
+    /**
+     * Method to execute command with multi param
+     * @param params
+     */
+    public static void multiParam(String params) {
         String carNumber = params.substring(0,params.indexOf(" "));
         String carColour = params.substring(params.indexOf(" "));
         // check availability of slot
@@ -43,25 +52,28 @@ public class Service {
             slot.setAvailability(false);
             // create ticket for that slot
             slot.ticket = new Ticket(carNumber.trim(),carColour.trim());
-            // Update parking with the updated slot
-            Parking.addUpdatedSlot(slot);
             System.out.println("Allocated slot number: : " + slot.slotNumber);
         } else {
             System.out.println("Sorry, parking lot is full.");
         }
     }
 
-    public static void multiParam(String command, String params) {
+    /**
+     * Method to execute command with one param
+     * @param command
+     * @param param
+     */
+    public static void uniiParam(String command, String param) {
         if (command.equals("create_parking_lot")) {
-            Parking.initializeParking(Integer.parseInt(params.trim()));
+            Parking.initializeParking(Integer.parseInt(param.trim()));
         } else if (command.equals("leave")){
-            Parking.freeThisSlot(Integer.parseInt(params.trim()));
+            Parking.freeThisSlot(Integer.parseInt(param.trim()));
         } else if (command.equals("registration_numbers_for_cars_with_colour")) {
-            printResponse(Parking.getCarRegistrationNumbersForTheGivenColour(params.trim()));
+            printResponse(Parking.getCarRegistrationNumbersForTheGivenColour(param.trim()));
         } else if (command.equals("slot_numbers_for_cars_with_colour")) {
-            printResponse(Parking.getSlotNumbersForCarsWithColour(params.trim()));
+            printResponse(Parking.getSlotNumbersForCarsWithColour(param.trim()));
         } else if (command.equals("slot_number_for_registration_number")) {
-            printResponse(Parking.getSlotNumberForRegistrationNumber(params.trim()));
+            printResponse(Parking.getSlotNumberForRegistrationNumber(param.trim()));
         }
     }
 
@@ -81,8 +93,11 @@ public class Service {
         }
     }
 
+    /**
+     * Method to perform interactive mode exexcution
+     */
     public static void interactiveMode() {
-        System.out.println("Interactive mode");
+        System.out.println("Interactive mode, please enter your command : ");
         Scanner scanner = new Scanner(System.in);
         String commandLine = scanner.nextLine();
         while (Configuration.isAValidCommand(commandLine)){
@@ -98,6 +113,10 @@ public class Service {
         System.out.println("Exiting, incorrect command : " + commandLine);
     }
 
+    /**
+     * Method to perform file mode execution for the given file path
+     * @param arg : commands file path
+     */
     public static void fileMode(String arg) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(arg));
